@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:talkio_app/Features/auth/presentation/reset_password.dart';
+import 'package:talkio_app/Features/profile/reset_password.dart';
 import 'package:talkio_app/Features/auth/widgets/custom_button.dart';
 import 'package:talkio_app/Features/auth/widgets/custom_text_field.dart';
+import 'package:talkio_app/Features/profile/setup_profile.dart';
 import 'package:talkio_app/utils/colors.dart';
 import 'package:talkio_app/widgets/logo_app.dart';
 
@@ -68,7 +69,12 @@ class LoginViewBody extends StatelessWidget {
                   children: [
                     TextButton(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => ResetPasswordScreen(),),);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ResetPasswordScreen(),
+                          ),
+                        );
                       },
                       child: Text(
                         'Forget Password?',
@@ -94,9 +100,17 @@ class LoginViewBody extends StatelessWidget {
                 const SizedBox(
                   height: 14,
                 ),
-                const CustomButton2(
+                CustomButton2(
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SetupProfile(),
+                        ),
+                        (route) => false);
+                  },
                   text: 'CREATE ACCOUNT',
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                 ),
               ],
             ),
