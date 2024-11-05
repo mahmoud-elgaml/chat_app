@@ -27,6 +27,9 @@ class CustomButton extends StatelessWidget {
       child: Center(
         child: Text(
           text,
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.onPrimary,
+          ),
         ),
       ),
     );
@@ -38,11 +41,9 @@ class CustomButton2 extends StatelessWidget {
       {super.key,
       required this.text,
       this.onPressed,
-      this.color,
       this.padding = const EdgeInsets.all(0)});
   final String text;
   final void Function()? onPressed;
-  final Color? color;
   final EdgeInsetsGeometry padding;
   @override
   Widget build(BuildContext context) {
@@ -59,9 +60,6 @@ class CustomButton2 extends StatelessWidget {
       child: Center(
         child: Text(
           text,
-          style: TextStyle(
-            color: color ?? Theme.of(context).colorScheme.primaryFixed,
-          ),
         ),
       ),
     );

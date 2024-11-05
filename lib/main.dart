@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:talkio_app/Features/auth/presentation/login_view.dart';
+import 'package:talkio_app/layout.dart';
 
 void main() {
   runApp(const Talkio());
@@ -27,7 +27,7 @@ class Talkio extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const LoginView(),
+      home:  const LayoutApp(),
     );
   }
 }
