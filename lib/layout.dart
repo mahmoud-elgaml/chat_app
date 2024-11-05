@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:talkio_app/Features/layout/chat_screen.dart';
+import 'package:talkio_app/Features/layout/contact_screen.dart';
+import 'package:talkio_app/Features/layout/group_screen.dart';
+import 'package:talkio_app/Features/layout/setting_screen.dart';
 
 class LayoutApp extends StatefulWidget {
   const LayoutApp({super.key});
@@ -16,28 +20,6 @@ class _LayoutAppState extends State<LayoutApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
-        children: <Widget>[
-          Container(
-            child: Center(
-              child: Text('Chat'),
-            ),
-          ),
-          Container(
-            child: Center(
-              child: Text('Group'),
-            ),
-          ),
-          Container(
-            child: Center(
-              child: Text('Contact'),
-            ),
-          ),
-          Container(
-            child: Center(
-              child: Text('Setting'),
-            ),
-          ),
-        ],
         physics: const PageScrollPhysics(),
         controller: pageController,
         onPageChanged: (value) {
@@ -45,6 +27,12 @@ class _LayoutAppState extends State<LayoutApp> {
             currentIndex = value;
           });
         },
+        children: const <Widget>[
+          ChatScreen(),
+          GroupScreen(),
+          ContactScreen(),
+          SettingScreen(),
+        ],
       ),
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (value) {

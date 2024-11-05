@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:talkio_app/layout.dart';
+import 'package:talkio_app/utils/colors.dart';
 
 void main() {
   runApp(const Talkio());
@@ -18,16 +19,16 @@ class Talkio extends StatelessWidget {
           seedColor: Colors.indigo,
           brightness: Brightness.dark,
         ),
-        useMaterial3: true, 
+        useMaterial3: true,
       ),
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.blue,
+          seedColor: kPrimaryColor,
           brightness: Brightness.light,
         ),
         useMaterial3: true,
       ),
-      home:  const LayoutApp(),
+      home: const LayoutApp(),
     );
   }
 }
