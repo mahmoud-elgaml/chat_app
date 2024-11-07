@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:talkio_app/Features/chat/widgets/chat_message_card.dart';
 import 'package:talkio_app/Features/chat/widgets/input_message_field.dart';
 
 class ChatPage extends StatelessWidget {
@@ -37,16 +36,19 @@ class ChatPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
         child: Column(
           children: [
+            // Expanded(
+            //   child: ListView.builder(
+            //     itemCount: 20,
+            //     // reverse: true,
+            //     physics: const BouncingScrollPhysics(),
+            //     padding: const EdgeInsets.all(4),
+            //     itemBuilder: (context, index) {
+            //       return ChatMessageCard(index: index);
+            //     },
+            //   ),
+              
+            // ),
             Expanded(
-              // child: ListView.builder(
-              //   itemCount: 20,
-              //   // reverse: true,
-              //   physics: const BouncingScrollPhysics(),
-              //   padding: const EdgeInsets.all(4),
-              //   itemBuilder: (context, index) {
-              //     return ChatMessageCard(index: index);
-              //   },
-              // ),
               child: GestureDetector(
                 onTap: () {},
                 child: Center(

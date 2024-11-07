@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:talkio_app/Features/layout/chat_screen.dart';
-import 'package:talkio_app/Features/layout/contact_screen.dart';
-import 'package:talkio_app/Features/layout/group_screen.dart';
-import 'package:talkio_app/Features/layout/setting_screen.dart';
+import 'package:talkio_app/Features/layout/chat_home_screen.dart';
+import 'package:talkio_app/Features/layout/contact_home_screen.dart';
+import 'package:talkio_app/Features/layout/group_home_screen.dart';
+import 'package:talkio_app/Features/layout/setting_home_screen.dart';
 
 class LayoutApp extends StatefulWidget {
   const LayoutApp({super.key});
@@ -28,10 +28,10 @@ class _LayoutAppState extends State<LayoutApp> {
           });
         },
         children: const <Widget>[
-          ChatScreen(),
-          GroupScreen(),
-          ContactScreen(),
-          SettingScreen(),
+          ChatHomeScreen(),
+          GroupHomeScreen(),
+          ContactHomeScreen(),
+          SettingHomeScreen(),
         ],
       ),
       bottomNavigationBar: NavigationBar(

@@ -4,14 +4,14 @@ import 'package:iconsax/iconsax.dart';
 import 'package:talkio_app/Features/layout/widgets/chat_card.dart';
 import 'package:talkio_app/Features/layout/widgets/custom_bottom_sheet.dart';
 
-class ChatScreen extends StatefulWidget {
-  const ChatScreen({super.key});
+class ChatHomeScreen extends StatefulWidget {
+  const ChatHomeScreen({super.key});
 
   @override
-  State<ChatScreen> createState() => _ChatScreenState();
+  State<ChatHomeScreen> createState() => _ChatHomeScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
+class _ChatHomeScreenState extends State<ChatHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
