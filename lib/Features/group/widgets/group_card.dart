@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:talkio_app/Features/group/chat_group_screen.dart';
 import 'package:talkio_app/utils/colors.dart';
 
 class GroupCard extends StatelessWidget {
@@ -11,12 +12,12 @@ class GroupCard extends StatelessWidget {
       color: const Color.fromARGB(255, 127, 136, 179),
       child: ListTile(
         onTap: () {
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => const CreateGroupPage(),
-          //   ),
-          // );
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const GroupPage(),
+            ),
+          );
         },
         leading: CircleAvatar(
           radius: 30,
