@@ -38,14 +38,41 @@ class ChatPage extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: ListView.builder(
-                itemCount: 20,
-                // reverse: true,
-                physics: const BouncingScrollPhysics(),
-                padding: const EdgeInsets.all(4),
-                itemBuilder: (context, index) {
-                  return ChatMessageCard(index: index);
-                },
+              // child: ListView.builder(
+              //   itemCount: 20,
+              //   // reverse: true,
+              //   physics: const BouncingScrollPhysics(),
+              //   padding: const EdgeInsets.all(4),
+              //   itemBuilder: (context, index) {
+              //     return ChatMessageCard(index: index);
+              //   },
+              // ),
+              child: GestureDetector(
+                onTap: () {},
+                child: Center(
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(60.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            '👋',
+                            style: Theme.of(context).textTheme.displayMedium,
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            "Say Hello",
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
             Row(
