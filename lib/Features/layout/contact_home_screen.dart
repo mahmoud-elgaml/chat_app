@@ -15,7 +15,7 @@ class ContactHomeScreen extends StatefulWidget {
 class _ContactHomeScreenState extends State<ContactHomeScreen> {
   final TextEditingController controller = TextEditingController();
   final TextEditingController searchController = TextEditingController();
-  bool searched = true;
+  bool searched = false;
 
   @override
   Widget build(BuildContext context) {
