@@ -38,7 +38,7 @@ class ChatPage extends StatelessWidget {
           children: [
             // Expanded(
             //   child: ListView.builder(
-            //     itemCount: 20,
+            //     itemCount: 7,
             //     // reverse: true,
             //     physics: const BouncingScrollPhysics(),
             //     padding: const EdgeInsets.all(4),

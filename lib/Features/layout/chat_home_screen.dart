@@ -4,14 +4,9 @@ import 'package:iconsax/iconsax.dart';
 import 'package:talkio_app/Features/layout/widgets/chat_card.dart';
 import 'package:talkio_app/Features/layout/widgets/custom_bottom_sheet.dart';
 
-class ChatHomeScreen extends StatefulWidget {
+class ChatHomeScreen extends StatelessWidget {
   const ChatHomeScreen({super.key});
 
-  @override
-  State<ChatHomeScreen> createState() => _ChatHomeScreenState();
-}
-
-class _ChatHomeScreenState extends State<ChatHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +31,7 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
           children: [
             Expanded(
               child: ListView.builder(
-                itemCount: 7,
+                itemCount: 5,
                 itemBuilder: (context, index) {
                   return const ChatCard();
                 },

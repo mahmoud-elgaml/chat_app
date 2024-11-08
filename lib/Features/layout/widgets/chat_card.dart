@@ -22,6 +22,7 @@ class ChatCard extends StatelessWidget {
         },
         leading: const CircleAvatar(
           radius: 30,
+          child: Text('img'),
         ),
         title: const Text('Name'),
         subtitle: const Text('latestMessage'),

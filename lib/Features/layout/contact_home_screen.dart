@@ -14,6 +14,8 @@ class ContactHomeScreen extends StatefulWidget {
 
 class _ContactHomeScreenState extends State<ContactHomeScreen> {
   final TextEditingController controller = TextEditingController();
+  final TextEditingController searchController = TextEditingController();
+  bool searched = true;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class _ContactHomeScreenState extends State<ContactHomeScreen> {
                   Row(
                     children: [
                       Text(
-                        'Enter Friend Email',
+                        'Add Friend',
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
                       const Spacer(),
@@ -74,9 +76,50 @@ class _ContactHomeScreenState extends State<ContactHomeScreen> {
         ),
       ),
       appBar: AppBar(
-        title: const Text(
-          'Contacts',
-        ),
+        title: searched
+            ? Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      maxLines: 1,
+                      autofocus: true,
+                      controller: searchController,
+                      decoration: const InputDecoration(
+                        border: UnderlineInputBorder(borderSide: BorderSide()),
+                        labelText: 'Search contact',
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            : const Text(
+                'My Contacts',
+              ),
+        actions: [
+          searched
+              ? IconButton(
+                  onPressed: () {
+                    setState(() {
+                      searched = false;
+                    });
+                  },
+                  icon: const Icon(
+                    Iconsax.close_circle,
+                    size: 30,
+                  ),
+                )
+              : IconButton(
+                  onPressed: () {
+                    setState(() {
+                      searched = true;
+                    });
+                  },
+                  icon: const Icon(
+                    Icons.search_outlined,
+                    size: 30,
+                  ),
+                ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

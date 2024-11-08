@@ -35,10 +35,10 @@ class GroupMembersScreen extends StatelessWidget {
                 itemCount: 5,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(
+                    title: const Text(
                       'Mahmoud',
                     ),
-                    subtitle: Text(
+                    subtitle: const Text(
                       'Admin',
                     ),
                     trailing: Row(

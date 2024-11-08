@@ -46,19 +46,19 @@ class _LayoutAppState extends State<LayoutApp> {
         destinations: const [
           NavigationDestination(
             icon: Icon(Iconsax.message),
-            label: 'Chat',
+            label: 'Chats',
           ),
           NavigationDestination(
             icon: Icon(Iconsax.messages),
-            label: 'Group',
+            label: 'Groups',
           ),
           NavigationDestination(
             icon: Icon(Iconsax.user),
-            label: 'Contact',
+            label: 'Contacts',
           ),
           NavigationDestination(
             icon: Icon(Iconsax.setting),
-            label: 'Setting',
+            label: 'Settings',
           ),
         ],
       ),
