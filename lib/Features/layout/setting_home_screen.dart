@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:talkio_app/Features/layout/widgets/settings_card.dart';
 import 'package:talkio_app/Features/settings/profile_screen.dart';
@@ -37,35 +38,58 @@ class SettingHomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-               SettingsCard(
-              onPressed: () {
-                      Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const ProfileScreen(),
-                      ),
-                    );
-              },
+              SettingsCard(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ProfileScreen(),
+                    ),
+                  );
+                },
                 trailing: const Icon(
                   Icons.arrow_forward_ios_rounded,
                 ),
-                leading:  const Icon(
+                leading: const Icon(
                   Iconsax.user,
                 ),
-                title:  const Text(
+                title: const Text(
                   'Profile',
                 ),
               ),
-              const SettingsCard(
-                trailing: Icon(
+              SettingsCard(
+                trailing: const Icon(
                   Icons.mode_night_sharp,
                 ),
-                leading: Icon(
+                leading: const Icon(
                   Iconsax.color_swatch,
                 ),
-                title: Text(
+                title: const Text(
                   'Theme',
                 ),
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          // title:  Text('Select Theme'),
+                          content: SingleChildScrollView(
+                            child: BlockPicker(
+                              pickerColor: Colors.indigo,
+                              onColorChanged: (color) {},
+                            ),
+                          ),
+                          actions: [
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('Done'),
+                            ),
+                          ],
+                        );
+                      });
+                },
               ),
               SettingsCard(
                 title: const Text(
