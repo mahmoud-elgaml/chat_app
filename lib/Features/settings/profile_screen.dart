@@ -110,7 +110,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             const CustomButton(
               text: 'Save',
               // color: kPrimaryColor,
-              padding:  EdgeInsets.all(20),
+              padding: EdgeInsets.all(20),
             ),
           ],
         ),

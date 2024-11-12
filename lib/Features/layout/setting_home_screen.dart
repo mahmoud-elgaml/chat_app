@@ -3,6 +3,7 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:talkio_app/Features/layout/widgets/settings_card.dart';
 import 'package:talkio_app/Features/settings/profile_screen.dart';
+import 'package:talkio_app/Features/settings/qr_code_screen.dart';
 
 class SettingHomeScreen extends StatelessWidget {
   const SettingHomeScreen({super.key});
@@ -32,7 +33,14 @@ class SettingHomeScreen extends StatelessWidget {
                 ),
                 minVerticalPadding: 40,
                 trailing: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const QrCodeScreen(),
+                      ),
+                    );
+                  },
                   icon: const Icon(
                     Iconsax.scan_barcode,
                   ),

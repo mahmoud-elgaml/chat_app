@@ -38,6 +38,7 @@ dependencies:
   flutter_svg: ^2.0.11
   iconsax: ^0.0.8
   flutter_colorpicker: ^1.1.0
+  qr_flutter: ^4.1.0
 
 dev_dependencies:
   flutter_test:
