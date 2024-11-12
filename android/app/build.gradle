@@ -1,41 +1,39 @@
 plugins {
     id "com.android.application"
+    // FlutterFire Configuration
+    id 'com.google.gms.google-services'
     id "kotlin-android"
-    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
-    id "dev.flutter.flutter-gradle-plugin"
+    id "dev.flutter.flutter-gradle-plugin" // يجب أن يأتي بعد إضافات Android وKotlin
 }
 
 android {
     namespace = "com.example.talkio_app"
-    compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    compileSdkVersion 34  // استبدل flutter.compileSdkVersion بالقيمة المباشرة
+    ndkVersion = "23.1.7779620"  // تأكد من تحديد نسخة NDK أو اتركها كما هي في إعداداتك
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
+        jvmTarget = "1.8"
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.talkio_app"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
-        versionCode = flutter.versionCode
-        versionName = flutter.versionName
+       applicationId "com.example.talkio_app"
+        minSdkVersion 23
+        targetSdkVersion 34
+        versionCode 1
+        versionName "1.0"
     }
 
     buildTypes {
-        release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.debug
-        }
+            release {
+        minifyEnabled false // تأكد من أن هذا الإعداد موجود
+        shrinkResources false // أضف هذا السطر لتعطيل إزالة الموارد غير المستخدمة
+        proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+    }
     }
 }
 

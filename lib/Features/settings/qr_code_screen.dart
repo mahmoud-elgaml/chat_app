@@ -17,7 +17,7 @@ class QrCodeScreen extends StatelessWidget {
               Card(
                 color: Colors.transparent,
                 child: Padding(
-                  padding: const EdgeInsets.all(24.0),
+                  padding: const EdgeInsets.all(30.0),
                   child: Card(
                     color: Colors.white,
                     child: QrImageView(

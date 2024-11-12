@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1067743300847",
+    "project_id": "talkio-app-97894",
+    "storage_bucket": "talkio-app-97894.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1067743300847:android:3cf66b5444e9a12ea3df1a",
+        "android_client_info": {
+          "package_name": "com.example.talkio_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEbHk3SW0BgVJBgRpDeDjFIqUUCwXigyA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
