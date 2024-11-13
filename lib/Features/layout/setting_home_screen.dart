@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:iconsax/iconsax.dart';
@@ -77,26 +78,26 @@ class SettingHomeScreen extends StatelessWidget {
                 ),
                 onPressed: () {
                   showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          // title:  Text('Select Theme'),
-                          content: SingleChildScrollView(
-                            child: BlockPicker(
-                              pickerColor: Colors.indigo,
-                              onColorChanged: (color) {},
-                            ),
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        content: SingleChildScrollView(
+                          child: BlockPicker(
+                            pickerColor: Colors.indigo,
+                            onColorChanged: (color) {},
                           ),
-                          actions: [
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: const Text('Done'),
-                            ),
-                          ],
-                        );
-                      });
+                        ),
+                        actions: [
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text('Done'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
                 },
               ),
               SettingsCard(
@@ -112,11 +113,11 @@ class SettingHomeScreen extends StatelessWidget {
                 ),
               ),
               SettingsCard(
-                trailing: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.logout_rounded,
-                  ),
+                onPressed: () async {
+                  await FirebaseAuth.instance.signOut();
+                },
+                trailing: Icon(
+                  Icons.logout_rounded,
                 ),
                 title: const Text(
                   'Signout',
