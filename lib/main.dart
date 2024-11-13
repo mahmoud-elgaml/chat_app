@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:talkio_app/Features/auth/presentation/login_view.dart';
@@ -35,7 +36,16 @@ class Talkio extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const LoginView(),
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.userChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return const LayoutApp();
+          } else {
+            return const LoginView();
+          }
+        },
+      ),
     );
   }
 }
