@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:talkio_app/Features/auth/widgets/custom_button.dart';
 import 'package:talkio_app/Features/auth/widgets/custom_text_field.dart';
 import 'package:talkio_app/utils/colors.dart';
@@ -7,7 +9,7 @@ import 'package:talkio_app/widgets/logo_app.dart';
 class ResetPasswordScreen extends StatelessWidget {
   ResetPasswordScreen({super.key});
   final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  // final TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
@@ -51,18 +53,6 @@ class ResetPasswordScreen extends StatelessWidget {
                     return null;
                   },
                 ),
-                // CustomTextField(
-                //   hintText: 'Enter your new password',
-                //   prefixIcon: Icons.lock_outline,
-                //   controller: passwordController,
-                //   isPass: true,
-                //   validator: (value) {
-                //     if (value!.isEmpty) {
-                //       return 'Please enter your password';
-                //     }
-                //     return null;
-                //   },
-                // ),
                 const SizedBox(
                   height: 6,
                 ),
@@ -70,8 +60,35 @@ class ResetPasswordScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(16),
                   text: 'SEND EMAIL',
                   color: kPrimaryColor,
-                  onPressed: () {
-                    Navigator.pop(context);
+                  onPressed: () async {
+                    await FirebaseAuth.instance
+                        .sendPasswordResetEmail(email: emailController.text)
+                        .then(
+                      (value) {
+                        if (context.mounted) {
+                          Navigator.pop(context);
+                        }
+                        Fluttertoast.showToast(
+                          msg: "password sent to email ${emailController.text}",
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 1,
+                           backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 16.0,
+                        ).onError(
+                          (error, stackTrace) => Fluttertoast.showToast(
+                            msg: error.toString(),
+                            toastLength: Toast.LENGTH_LONG,
+                            gravity: ToastGravity.BOTTOM,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0,
+                          ),
+                        );
+                      },
+                    );
                   },
                 ),
                 const SizedBox(
