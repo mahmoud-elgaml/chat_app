@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:talkio_app/Features/auth/widgets/custom_button.dart';
 import 'package:talkio_app/Features/auth/widgets/custom_text_field.dart';
+import 'package:talkio_app/firbase/fire_database.dart';
 import 'package:talkio_app/utils/colors.dart';
 
 class CustomBottomSheet extends StatelessWidget {
-   CustomBottomSheet({
+  CustomBottomSheet({
     super.key,
   });
- final TextEditingController emailController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +52,10 @@ class CustomBottomSheet extends StatelessWidget {
             text: 'Create Chat',
             color: Theme.of(context).colorScheme.primaryContainer,
             padding: const EdgeInsets.all(16),
-            onPressed: () {},
+            onPressed: () {
+              FireData().createRoom(emailController.text);
+              Navigator.pop(context);
+            },
           ),
         ],
       ),
