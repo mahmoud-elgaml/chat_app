@@ -27,7 +27,7 @@ class Talkio extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.indigo,
           brightness: Brightness.dark,
-        ),
+        ), 
         useMaterial3: true,
       ),
       theme: ThemeData(
