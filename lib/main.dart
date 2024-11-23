@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:talkio_app/Features/auth/presentation/login_view.dart';
+import 'package:talkio_app/Features/profile/setup_profile.dart';
 import 'package:talkio_app/firebase_options.dart';
 import 'package:talkio_app/layout.dart';
 import 'package:talkio_app/utils/colors.dart';
@@ -40,7 +41,12 @@ class Talkio extends StatelessWidget {
         stream: FirebaseAuth.instance.userChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return const LayoutApp();
+            if (FirebaseAuth.instance.currentUser!.displayName == "" ||
+                FirebaseAuth.instance.currentUser!.displayName == null) {
+              return SetupProfile();
+            } else {
+              return LayoutApp();
+            }
           } else {
             return const LoginView();
           }

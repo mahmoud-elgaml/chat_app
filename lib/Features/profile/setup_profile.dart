@@ -1,14 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:talkio_app/Features/auth/presentation/login_view.dart';
 import 'package:talkio_app/Features/auth/widgets/custom_button.dart';
 import 'package:talkio_app/Features/auth/widgets/custom_text_field.dart';
+import 'package:talkio_app/firbase/fire_auth.dart';
 import 'package:talkio_app/utils/colors.dart';
 
 class SetupProfile extends StatelessWidget {
   SetupProfile({super.key});
 
-  final TextEditingController controller = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
@@ -17,13 +18,8 @@ class SetupProfile extends StatelessWidget {
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () {
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const LoginView(),
-                  ),
-                  (route) => false);
+            onPressed: () async {
+              await FirebaseAuth.instance.signOut();
             },
             icon: Icon(
               Iconsax.logout4,
@@ -60,7 +56,7 @@ class SetupProfile extends StatelessWidget {
                 CustomTextField(
                   hintText: 'Name',
                   prefixIcon: Iconsax.user,
-                  controller: controller,
+                  controller: nameController,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Please enter your name';
@@ -75,7 +71,15 @@ class SetupProfile extends StatelessWidget {
                   padding: const EdgeInsets.all(16),
                   text: 'Continue',
                   color: kPrimaryColor,
-                  onPressed: () {},
+                  onPressed: () async {
+                    if (nameController.text.isNotEmpty) {
+                      await FirebaseAuth.instance.currentUser!
+                          .updateDisplayName(nameController.text)
+                          .then(
+                            (value) => FireAuth.createUser(),
+                          );
+                    }
+                  },
                 ),
               ],
             ),

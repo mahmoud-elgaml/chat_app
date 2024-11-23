@@ -28,7 +28,7 @@ class UserModel {
       email: json['email'],
       createdAt: json['created_at'],
       lastActivated: json['last_activated'],
-      pushToken: json['pushToken'],
+      pushToken: json['push_token'],
       about: json['about'],
       online: json['online'],
       image: json['image'],
@@ -42,7 +42,7 @@ class UserModel {
       'image': image,
       'created_at': createdAt,
       'last_activated': lastActivated,
-      'pushToken': pushToken,
+      'push_token': pushToken,
       'about': about,
       'online': online,
     };

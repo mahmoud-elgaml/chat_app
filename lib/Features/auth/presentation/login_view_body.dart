@@ -129,7 +129,7 @@ class LoginViewBody extends StatelessWidget {
                           password: passwordController.text,
                         )
                         .then(
-                          (value) => log('Done'),
+                          (value) => log('Login Done '),
                         )
                         .onError(
                           (error, stackTrace) => Fluttertoast.showToast(
