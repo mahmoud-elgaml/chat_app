@@ -6,7 +6,7 @@ class FireData {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final String myUid = FirebaseAuth.instance.currentUser!.uid;
 
-  createRoom(String email) async {
+ Future createRoom(String email) async {
     QuerySnapshot userEmail = await firestore
         .collection('users')
         .where(
@@ -14,18 +14,27 @@ class FireData {
           isEqualTo: email,
         )
         .get();
+        if(userEmail.docs.isNotEmpty){
+         
     String userId = userEmail.docs[0].id;
-    List members = [myUid, userId];
-    ChatRoom chatRoom = ChatRoom(
-      lastMessageTime: DateTime.now().toString(),
-      members: members,
-      lastMessage: '',
-      id: members.toString(),
-      createdAt: DateTime.now().toString(),
-    );
-    await firestore
+    List<String> members = [myUid, userId]..sort((a, b) => a.compareTo(b));
+    QuerySnapshot roomExist = await firestore
         .collection('rooms')
-        .doc(members.toString())
-        .set(chatRoom.toJson());
+        .where('members', isEqualTo: members)
+        .get();
+    if (roomExist.docs.isEmpty) {
+      ChatRoom chatRoom = ChatRoom(
+        lastMessageTime: DateTime.now().toString(),
+        members: members,
+        lastMessage: '',
+        id: members.toString(),
+        createdAt: DateTime.now().toString(),
+      );
+      await firestore
+          .collection('rooms')
+          .doc(members.toString())
+          .set(chatRoom.toJson());
+    }
   }
+}
 }
