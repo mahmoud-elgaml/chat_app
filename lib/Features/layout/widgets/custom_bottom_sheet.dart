@@ -53,8 +53,12 @@ class CustomBottomSheet extends StatelessWidget {
             color: Theme.of(context).colorScheme.primaryContainer,
             padding: const EdgeInsets.all(16),
             onPressed: () {
-              FireData().createRoom(emailController.text);
-              Navigator.pop(context);
+              if (emailController.text.isNotEmpty) {
+                FireData().createRoom(emailController.text);
+                Navigator.pop(context);
+              }else{
+                return ;
+              }
             },
           ),
         ],
