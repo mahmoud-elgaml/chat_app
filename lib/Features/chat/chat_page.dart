@@ -62,16 +62,58 @@ class _ChatPageState extends State<ChatPage> {
                         .map((e) => MessageModel.fromJson(e.data()))
                         .toList()
                       ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
-                    return ListView.builder(
-                      reverse: true,
-                      itemCount: messageItems.length,
-                      itemBuilder: (context, index) {
-                        return ChatMessageCard(
-                          index: index,
-                          messageItem: messageItems[index],
-                        );
-                      },
-                    );
+                    return messageItems.isNotEmpty
+                        ? ListView.builder(
+                            reverse: true,
+                            itemCount: messageItems.length,
+                            itemBuilder: (context, index) {
+                              return ChatMessageCard(
+                                index: index,
+                                messageItem: messageItems[index],
+                              );
+                            },
+                          )
+                        : GestureDetector(
+                            onTap: () {
+                              FireData()
+                                  .sendMessage(
+                                    widget.userModel.id,
+                                    "Hello ${widget.userModel.name} 👋",
+                                    widget.chatID,
+                                  )
+                                  .then(
+                                    (value) => messageController.clear(),
+                                  );
+                            },
+                            child: Center(
+                              child: Card(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(60.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        '👋',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .displayMedium,
+                                      ),
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      Text(
+                                        "Say Hello",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
                   } else {
                     return const Center(
                       child: CircularProgressIndicator(),
@@ -79,34 +121,6 @@ class _ChatPageState extends State<ChatPage> {
                   }
                 },
               ),
-
-              // child: GestureDetector(
-              //   onTap: () {},
-              //   child: Center(
-              //     child: Card(
-              //       child: Padding(
-              //         padding: const EdgeInsets.all(60.0),
-              //         child: Column(
-              //           mainAxisSize: MainAxisSize.min,
-              //           mainAxisAlignment: MainAxisAlignment.center,
-              //           children: [
-              //             Text(
-              //               '👋',
-              //               style: Theme.of(context).textTheme.displayMedium,
-              //             ),
-              //             const SizedBox(
-              //               height: 20,
-              //             ),
-              //             Text(
-              //               "Say Hello",
-              //               style: Theme.of(context).textTheme.bodyLarge,
-              //             ),
-              //           ],
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
             ),
             Row(
               children: [

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:talkio_app/Features/chat/models/message_model.dart';
 
 class ChatMessageCard extends StatelessWidget {
@@ -65,8 +66,10 @@ class ChatMessageCard extends StatelessWidget {
                         width: 5,
                       ),
                       Text(
-                        messageItem.createdAt,
-                        style: Theme.of(context).textTheme.labelSmall,
+                        DateFormat.yMMMEd()
+                            .format(DateTime.fromMillisecondsSinceEpoch(int.parse(messageItem.createdAt)))
+                            .toString(),
+                            style: Theme.of(context).textTheme.labelSmall,
                       ),
                     ],
                   ),

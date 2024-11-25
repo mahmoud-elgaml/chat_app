@@ -25,11 +25,11 @@ class FireData {
           .get();
       if (roomExist.docs.isEmpty) {
         ChatRoom chatRoom = ChatRoom(
-          lastMessageTime: DateTime.now().toString(),
+          lastMessageTime:DateTime.now().millisecondsSinceEpoch.toString(),
           members: members,
           lastMessage: '',
           id: members.toString(),
-          createdAt: DateTime.now().toString(),
+          createdAt: DateTime.now().millisecondsSinceEpoch.toString(),
         );
         await firestore
             .collection('rooms')
@@ -45,7 +45,7 @@ class FireData {
       message: msg,
       id: msgId,
       type: 'text',
-      createdAt: DateTime.now().toString(),
+      createdAt: DateTime.now().millisecondsSinceEpoch.toString(),
       read: '',
       fromId: myUid,
       toId: uId,
