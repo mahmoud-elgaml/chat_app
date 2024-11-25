@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:talkio_app/Features/chat/widgets/input_message_field.dart';
 import 'package:talkio_app/Features/group/group_member_screen.dart';
+import 'package:talkio_app/Features/group/widgets/group_input_message.dart';
 import 'package:talkio_app/Features/group/widgets/group_message_card.dart';
 
 class GroupPage extends StatelessWidget {
-  final TextEditingController messageController;
-
-  const GroupPage({super.key, required this.messageController});
+  const GroupPage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -62,9 +62,7 @@ class GroupPage extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: InputMessageField(
-                    messageController: messageController,
-                  ),
+                  child: GroupInputMessageField(),
                 ),
                 IconButton.filled(
                   onPressed: () {},

@@ -1,13 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
-class InputMessageField extends StatelessWidget {
-  final TextEditingController messageController;
+class GroupInputMessageField extends StatelessWidget {
 
-  const InputMessageField({
-    required this.messageController,
+  const GroupInputMessageField({
     super.key,
   });
 
@@ -18,7 +13,6 @@ class InputMessageField extends StatelessWidget {
       elevation: 0.0,
       margin: const EdgeInsets.all(8),
       child: TextField(
-        controller: messageController,
         maxLines: 5,
         minLines: 1,
         decoration: InputDecoration(
@@ -43,15 +37,7 @@ class InputMessageField extends StatelessWidget {
                 icon: const Icon(Icons.emoji_emotions_outlined),
               ),
               IconButton(
-                onPressed: () async{
-                  ImagePicker imagePicker = ImagePicker();
-                  XFile? image = await imagePicker.pickImage(
-                    source: ImageSource.gallery,
-                  );
-                  if (image != null) {
-                    log(image.path);
-                  }
-                },
+                onPressed: () {},
                 icon: const Icon(
                   Icons.camera_alt_outlined,
                 ),

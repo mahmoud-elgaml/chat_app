@@ -15,9 +15,7 @@ class GroupCard extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>  GroupPage(
-                messageController: TextEditingController(),
-              ),
+              builder: (context) => GroupPage(),
             ),
           );
         },
