@@ -54,7 +54,9 @@ class ChatHomeScreen extends StatelessWidget {
                       return ListView.builder(
                         itemCount: chats.length,
                         itemBuilder: (context, index) {
-                          return const ChatCard();
+                          return ChatCard(
+                            item: chats[index],
+                          );
                         },
                       );
                     } else {

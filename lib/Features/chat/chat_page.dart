@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:talkio_app/Features/auth/model/user_model.dart';
 import 'package:talkio_app/Features/chat/widgets/input_message_field.dart';
 
 class ChatPage extends StatelessWidget {
-  const ChatPage({super.key});
+  final String chatID;
+  final UserModel userModel;
+  const ChatPage({super.key, required this.chatID, required this.userModel});
 
   @override
   Widget build(BuildContext context) {
@@ -12,11 +15,11 @@ class ChatPage extends StatelessWidget {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Mahmoud',
+            Text(
+              userModel.name,
             ),
             Text(
-              'Last seen 11:28',
+              userModel.lastActivated,
               style: Theme.of(context).textTheme.labelLarge,
             ),
           ],
@@ -36,18 +39,6 @@ class ChatPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
         child: Column(
           children: [
-            // Expanded(
-            //   child: ListView.builder(
-            //     itemCount: 7,
-            //     // reverse: true,
-            //     physics: const BouncingScrollPhysics(),
-            //     padding: const EdgeInsets.all(4),
-            //     itemBuilder: (context, index) {
-            //       return ChatMessageCard(index: index);
-            //     },
-            //   ),
-              
-            // ),
             Expanded(
               child: GestureDetector(
                 onTap: () {},
