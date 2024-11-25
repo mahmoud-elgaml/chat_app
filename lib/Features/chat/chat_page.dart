@@ -68,6 +68,7 @@ class _ChatPageState extends State<ChatPage> {
                             itemCount: messageItems.length,
                             itemBuilder: (context, index) {
                               return ChatMessageCard(
+                                roomId: widget.chatID,
                                 index: index,
                                 messageItem: messageItems[index],
                               );

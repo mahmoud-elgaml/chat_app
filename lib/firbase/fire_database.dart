@@ -25,7 +25,7 @@ class FireData {
           .get();
       if (roomExist.docs.isEmpty) {
         ChatRoom chatRoom = ChatRoom(
-          lastMessageTime:DateTime.now().millisecondsSinceEpoch.toString(),
+          lastMessageTime: DateTime.now().millisecondsSinceEpoch.toString(),
           members: members,
           lastMessage: '',
           id: members.toString(),
@@ -39,12 +39,13 @@ class FireData {
     }
   }
 
-  Future sendMessage(String uId, String msg, String roomId) async {
+  Future sendMessage(String uId, String msg, String roomId,
+      {String? type}) async {
     String msgId = Uuid().v4();
     MessageModel message = MessageModel(
       message: msg,
       id: msgId,
-      type: 'text',
+      type: type ?? 'text',
       createdAt: DateTime.now().millisecondsSinceEpoch.toString(),
       read: '',
       fromId: myUid,
@@ -56,5 +57,16 @@ class FireData {
         .collection('messages')
         .doc(msgId)
         .set(message.toJson());
+  }
+
+  Future readMessage(String roomId, String msgId) async {
+    await firestore
+        .collection('rooms')
+        .doc(roomId)
+        .collection('messages')
+        .doc(msgId)
+        .update({
+      'read': DateTime.now().millisecondsSinceEpoch.toString(),
+    });
   }
 }

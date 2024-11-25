@@ -49,7 +49,7 @@ class InputMessageField extends StatelessWidget {
                     source: ImageSource.gallery,
                   );
                   if (image != null) {
-                    log(image.path);
+                     log(image.path);
                   }
                 },
                 icon: const Icon(

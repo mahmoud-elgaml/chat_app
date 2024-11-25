@@ -2,18 +2,36 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:talkio_app/Features/chat/models/message_model.dart';
+import 'package:talkio_app/firbase/fire_database.dart';
 
-class ChatMessageCard extends StatelessWidget {
+class ChatMessageCard extends StatefulWidget {
   final int index;
   final MessageModel messageItem;
+  final String roomId;
   const ChatMessageCard({
     super.key,
     required this.index,
     required this.messageItem,
+    required this.roomId,
   });
+
+  @override
+  State<ChatMessageCard> createState() => _ChatMessageCardState();
+}
+
+class _ChatMessageCardState extends State<ChatMessageCard> {
+  @override
+  void initState() {
+    if (widget.messageItem.toId == FirebaseAuth.instance.currentUser!.uid) {
+      FireData().readMessage(widget.roomId, widget.messageItem.id);
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    bool isMe = messageItem.fromId == FirebaseAuth.instance.currentUser!.uid;
+    bool isMe =
+        widget.messageItem.fromId == FirebaseAuth.instance.currentUser!.uid;
     return Row(
       mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
@@ -49,17 +67,19 @@ class ChatMessageCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    messageItem.message,
+                    widget.messageItem.message,
                   ),
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const SizedBox(width: 5),
                       isMe
-                          ? const Icon(
+                          ? Icon(
                               Icons.check_circle_outlined,
+                              color: widget.messageItem.read == ''
+                                  ? Colors.grey
+                                  : Colors.blueAccent,
                               size: 18,
-                              color: Colors.blueAccent,
                             )
                           : const SizedBox(),
                       const SizedBox(
@@ -67,9 +87,10 @@ class ChatMessageCard extends StatelessWidget {
                       ),
                       Text(
                         DateFormat.yMMMEd()
-                            .format(DateTime.fromMillisecondsSinceEpoch(int.parse(messageItem.createdAt)))
+                            .format(DateTime.fromMillisecondsSinceEpoch(
+                                int.parse(widget.messageItem.createdAt)))
                             .toString(),
-                            style: Theme.of(context).textTheme.labelSmall,
+                        style: Theme.of(context).textTheme.labelSmall,
                       ),
                     ],
                   ),
