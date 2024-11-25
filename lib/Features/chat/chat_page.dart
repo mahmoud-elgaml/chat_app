@@ -2,12 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:talkio_app/Features/auth/model/user_model.dart';
 import 'package:talkio_app/Features/chat/widgets/input_message_field.dart';
+import 'package:talkio_app/firbase/fire_database.dart';
 
-class ChatPage extends StatelessWidget {
+class ChatPage extends StatefulWidget {
   final String chatID;
   final UserModel userModel;
   const ChatPage({super.key, required this.chatID, required this.userModel});
 
+  @override
+  State<ChatPage> createState() => _ChatPageState();
+}
+
+class _ChatPageState extends State<ChatPage> {
+  TextEditingController messageController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,10 +23,10 @@ class ChatPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              userModel.name,
+              widget.userModel.name,
             ),
             Text(
-              userModel.lastActivated,
+              widget.userModel.lastActivated,
               style: Theme.of(context).textTheme.labelLarge,
             ),
           ],
@@ -70,11 +77,22 @@ class ChatPage extends StatelessWidget {
             ),
             Row(
               children: [
-                const Expanded(
-                  child: InputMessageField(),
+                Expanded(
+                  child: InputMessageField(
+                    messageController: messageController,
+                  ),
                 ),
                 IconButton.filled(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (messageController.text.isNotEmpty) {
+                      FireData()
+                          .sendMessage(widget.userModel.id,
+                              messageController.text, widget.chatID)
+                          .then(
+                            (value) => messageController.clear(),
+                          );
+                    }
+                  },
                   icon: const Icon(
                     Iconsax.send_1,
                     size: 26,

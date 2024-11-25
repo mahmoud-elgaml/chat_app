@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class InputMessageField extends StatelessWidget {
+  final TextEditingController messageController;
+
   const InputMessageField({
+    required this.messageController,
     super.key,
   });
 
@@ -12,6 +15,7 @@ class InputMessageField extends StatelessWidget {
       elevation: 0.0,
       margin: const EdgeInsets.all(8),
       child: TextField(
+        controller: messageController,
         maxLines: 5,
         minLines: 1,
         decoration: InputDecoration(

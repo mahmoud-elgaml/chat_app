@@ -5,7 +5,9 @@ import 'package:talkio_app/Features/group/group_member_screen.dart';
 import 'package:talkio_app/Features/group/widgets/group_message_card.dart';
 
 class GroupPage extends StatelessWidget {
-  const GroupPage({super.key});
+  final TextEditingController messageController;
+
+  const GroupPage({super.key, required this.messageController});
 
   @override
   Widget build(BuildContext context) {
@@ -57,39 +59,12 @@ class GroupPage extends StatelessWidget {
                 },
               ),
             ),
-            // Expanded(
-            //   child: GestureDetector(
-            //     onTap: () {},
-            //     child: Center(
-            //       child: Card(
-            //         child: Padding(
-            //           padding: const EdgeInsets.all(60.0),
-            //           child: Column(
-            //             mainAxisSize: MainAxisSize.min,
-            //             mainAxisAlignment: MainAxisAlignment.center,
-            //             children: [
-            //               Text(
-            //                 '👋',
-            //                 style: Theme.of(context).textTheme.displayMedium,
-            //               ),
-            //               const SizedBox(
-            //                 height: 20,
-            //               ),
-            //               Text(
-            //                 "Say Hello",
-            //                 style: Theme.of(context).textTheme.bodyLarge,
-            //               ),
-            //             ],
-            //           ),
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
             Row(
               children: [
-                const Expanded(
-                  child: InputMessageField(),
+                Expanded(
+                  child: InputMessageField(
+                    messageController: messageController,
+                  ),
                 ),
                 IconButton.filled(
                   onPressed: () {},
