@@ -1,4 +1,5 @@
-import 'dart:developer';import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:developer';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:talkio_app/Features/profile/reset_password.dart';
@@ -170,7 +171,7 @@ class LoginViewBody extends StatelessWidget {
         log('The account already exists for that email.');
       }
     } catch (e) {
-      print(e);
+      log(e.toString());
     }
   }
 
