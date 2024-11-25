@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:talkio_app/Features/auth/model/user_model.dart';
+import 'package:talkio_app/Features/chat/models/message_model.dart';
+import 'package:talkio_app/Features/chat/widgets/chat_message_card.dart';
 import 'package:talkio_app/Features/chat/widgets/input_message_field.dart';
 import 'package:talkio_app/firbase/fire_database.dart';
 
@@ -47,33 +50,63 @@ class _ChatPageState extends State<ChatPage> {
         child: Column(
           children: [
             Expanded(
-              child: GestureDetector(
-                onTap: () {},
-                child: Center(
-                  child: Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(60.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            '👋',
-                            style: Theme.of(context).textTheme.displayMedium,
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            "Say Hello",
-                            style: Theme.of(context).textTheme.bodyLarge,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+              child: StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection('rooms')
+                    .doc(widget.chatID)
+                    .collection('messages')
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    List<MessageModel> messageItems = snapshot.data!.docs
+                        .map((e) => MessageModel.fromJson(e.data()))
+                        .toList()
+                      ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
+                    return ListView.builder(
+                      reverse: true,
+                      itemCount: messageItems.length,
+                      itemBuilder: (context, index) {
+                        return ChatMessageCard(
+                          index: index,
+                          messageItem: messageItems[index],
+                        );
+                      },
+                    );
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
               ),
+
+              // child: GestureDetector(
+              //   onTap: () {},
+              //   child: Center(
+              //     child: Card(
+              //       child: Padding(
+              //         padding: const EdgeInsets.all(60.0),
+              //         child: Column(
+              //           mainAxisSize: MainAxisSize.min,
+              //           mainAxisAlignment: MainAxisAlignment.center,
+              //           children: [
+              //             Text(
+              //               '👋',
+              //               style: Theme.of(context).textTheme.displayMedium,
+              //             ),
+              //             const SizedBox(
+              //               height: 20,
+              //             ),
+              //             Text(
+              //               "Say Hello",
+              //               style: Theme.of(context).textTheme.bodyLarge,
+              //             ),
+              //           ],
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ),
             Row(
               children: [

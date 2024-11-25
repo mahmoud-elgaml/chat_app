@@ -39,7 +39,7 @@ class FireData {
     }
   }
 
- Future sendMessage(String uId, String msg, String roomId) async{
+  Future sendMessage(String uId, String msg, String roomId) async {
     String msgId = Uuid().v4();
     MessageModel message = MessageModel(
       message: msg,
@@ -50,7 +50,7 @@ class FireData {
       fromId: myUid,
       toId: uId,
     );
-   await firestore
+    await firestore
         .collection('rooms')
         .doc(roomId)
         .collection('messages')

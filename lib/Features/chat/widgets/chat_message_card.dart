@@ -1,18 +1,22 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:talkio_app/Features/chat/models/message_model.dart';
 
 class ChatMessageCard extends StatelessWidget {
   final int index;
-
+  final MessageModel messageItem;
   const ChatMessageCard({
-    super.key, required this.index,
+    super.key,
+    required this.index,
+    required this.messageItem,
   });
   @override
   Widget build(BuildContext context) {
+    bool isMe = messageItem.fromId == FirebaseAuth.instance.currentUser!.uid;
     return Row(
-      mainAxisAlignment:
-          index % 2 == 0 ? MainAxisAlignment.end : MainAxisAlignment.start,
+      mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
-        index % 2 == 0
+        isMe
             ? IconButton(
                 onPressed: () {},
                 icon: const Icon(
@@ -25,13 +29,13 @@ class ChatMessageCard extends StatelessWidget {
         Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(index % 2 == 0 ? 16.0 : 0.0),
-              bottomRight: Radius.circular(index % 2 == 0 ? 0.0 : 16.0),
+              bottomLeft: Radius.circular(isMe ? 16.0 : 0.0),
+              bottomRight: Radius.circular(isMe ? 0.0 : 16.0),
               topRight: const Radius.circular(16),
               topLeft: const Radius.circular(16),
             ),
           ),
-          color: index % 2 == 0
+          color: isMe
               ? Theme.of(context).colorScheme.primaryContainer
               : Theme.of(context).colorScheme.secondaryContainer,
           child: Padding(
@@ -43,25 +47,27 @@ class ChatMessageCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  const Text(
-                    'messages How Are You Mahmoud',
-                    // style: Theme.of(context).textTheme.labelLarge,
+                  Text(
+                    messageItem.message,
                   ),
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(
-                        '11:30 pm',
-                        style: Theme.of(context).textTheme.labelSmall,
-                      ),
                       const SizedBox(width: 5),
-                      index % 2 == 0
+                      isMe
                           ? const Icon(
                               Icons.check_circle_outlined,
                               size: 18,
                               color: Colors.blueAccent,
                             )
                           : const SizedBox(),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        messageItem.createdAt,
+                        style: Theme.of(context).textTheme.labelSmall,
+                      ),
                     ],
                   ),
                 ],
