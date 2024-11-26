@@ -2,8 +2,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:talkio_app/Features/auth/model/user_model.dart';
 import 'package:talkio_app/Features/chat/chat_page.dart';
+import 'package:talkio_app/Features/chat/models/message_model.dart';
 import 'package:talkio_app/Features/chat/models/room_models.dart';
 
 class ChatCard extends StatelessWidget {
@@ -47,14 +49,42 @@ class ChatCard extends StatelessWidget {
                 child: Text('img'),
               ),
               title: Text(userModel.name),
-              subtitle: Text(item.lastMessage == "" ? userModel.about : item.lastMessage),
-              trailing: 1 / 1 == 0
-                  ? Badge(
-                      label: Text('3'),
-                      largeSize: 22.0,
-                      padding: EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-                    )
-                  : Text(''),
+              subtitle: Text(
+                item.lastMessage == "" ? userModel.about : item.lastMessage,
+              ),
+              trailing: StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection('rooms')
+                    .doc(item.id)
+                    .collection('messages')
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    final unreadList = snapshot.data?.docs
+                        .map((e) => MessageModel.fromJson(e.data()))
+                        .where((element) => element.read == "")
+                        .where((element) =>
+                            element.fromId !=
+                            FirebaseAuth.instance.currentUser!.uid) ?? [];
+                    return unreadList.length != 0
+                        ? Badge(
+                            label: Text(unreadList.length.toString()),
+                            largeSize: 22.0,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 6, vertical: 4),
+                          )
+                        : Text(
+                            DateFormat.yMMMEd().format(
+                              DateTime.fromMillisecondsSinceEpoch(
+                                int.parse(item.lastMessageTime),
+                              ),
+                            ),
+                          );
+                  } else {
+                    return Container();
+                  }
+                },
+              ),
             ),
           );
         } else {

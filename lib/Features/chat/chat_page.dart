@@ -18,6 +18,7 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   TextEditingController messageController = TextEditingController();
+  List selectedMessages = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,10 +68,36 @@ class _ChatPageState extends State<ChatPage> {
                             reverse: true,
                             itemCount: messageItems.length,
                             itemBuilder: (context, index) {
-                              return ChatMessageCard(
-                                roomId: widget.chatID,
-                                index: index,
-                                messageItem: messageItems[index],
+                              return GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    selectedMessages.isNotEmpty
+                                        ? selectedMessages.contains(
+                                                messageItems[index].id)
+                                            ? selectedMessages
+                                                .remove(messageItems[index].id)
+                                            : selectedMessages
+                                                .add(messageItems[index].id)
+                                        : null;
+                                  });
+                                },
+                                onLongPress: () {
+                                  setState(() {
+                                    selectedMessages
+                                            .contains(messageItems[index].id)
+                                        ? selectedMessages
+                                            .remove(messageItems[index].id)
+                                        : selectedMessages
+                                            .add(messageItems[index].id);
+                                  });
+                                },
+                                child: ChatMessageCard(
+                                  selected: selectedMessages
+                                      .contains(messageItems[index].id),
+                                  roomId: widget.chatID,
+                                  index: index,
+                                  messageItem: messageItems[index],
+                                ),
                               );
                             },
                           )

@@ -57,6 +57,10 @@ class FireData {
         .collection('messages')
         .doc(msgId)
         .set(message.toJson());
+    firestore.collection('rooms').doc(roomId).update({
+      'last_message': type ?? msg,
+      'last_message_time': DateTime.now().millisecondsSinceEpoch.toString()
+    });
   }
 
   Future readMessage(String roomId, String msgId) async {
